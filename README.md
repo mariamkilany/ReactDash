@@ -1,69 +1,88 @@
-# React + TypeScript + Vite
+# React Development Challenge | Orthoplex Solutions Inc.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a solution to the Orthoplex Solutions Inc. React Development Challenge. It demonstrates a modern, responsive dashboard application built with **React**, **TypeScript**, and **Vite**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Demo Credentials
 
-## Expanding the ESLint configuration
+> **This app uses a public fake API for demonstration. No real registration or data persistence occurs.**
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+**Use the following credentials to log in:**
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **Username:** `mor_2314`
+- **Password:** `83r5^_`
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Getting Started
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) (v16+ recommended)
+- [npm](https://www.npmjs.com/)
+
+### Installation
+
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Development
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev
 ```
+
+Open [http://localhost:5173](http://localhost:5173) in your browser.
+
+### Build
+
+```bash
+npm run build
+```
+
+### Preview Production Build
+
+```bash
+npm run preview
+```
+
+---
+
+## Features & Implementation
+
+- **Login Page**: Validates input, uses fake API for authentication, redirects to dashboard on success.
+- **Dashboard Page**: Fetches and displays product/user data from [Fake Store API](https://fakestoreapi.com/).
+- **Navbar**: Responsive, allows navigation, and shows/hides based on authentication and screen size.
+- **Protected Routes**: Only authenticated users can access the dashboard.
+- **Loader**: Consistent loading spinner shown during API requests and auth checks.
+- **Responsive Design**: Uses CSS Grid and Flexbox for layout; mobile-friendly navbar.
+- **Centralized Types**: All TypeScript interfaces/types are in `src/types`.
+- **State Management**: Uses React Context for authentication state.
+- **Logout**: Clears session and redirects to login (bonus).
+
+---
+
+## Project Structure
+
+```
+src/
+  components/         # UI and dashboard components
+  contexts/           # React context providers (e.g., Auth)
+  hooks/              # Custom React hooks
+  pages/              # Page-level components (Dashboard, Login, etc.)
+  providers/          # Context provider wrappers
+  routes/             # App routing and protected routes
+  schemas/            # Zod schemas for form validation
+  services/           # API service logic
+  styles/             # Global and module CSS
+  types/              # All TypeScript types and interfaces
+```
+
+---
+
+## Notes
+
+- **Fake API**: This app uses [Fake Store API](https://fakestoreapi.com/) for demonstration. No real registration or data persistence occurs.
+- **Registration**: The registration page is present for UI demonstration only; it does not create real users.
