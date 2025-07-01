@@ -1,5 +1,9 @@
 # React Development Challenge | Orthoplex Solutions Inc.
 
+[![Live Demo](https://img.shields.io/badge/Live%20Site-react--dash--psi.vercel.app-blue?style=flat-square)](https://react-dash-psi.vercel.app/login)
+
+**Live Site:** [https://react-dash-psi.vercel.app/login](https://react-dash-psi.vercel.app/login)
+
 This project is a solution to the Orthoplex Solutions Inc. React Development Challenge. It demonstrates a modern, responsive dashboard application built with **React**, **TypeScript**, and **Vite**.
 
 ---
@@ -12,6 +16,36 @@ This project is a solution to the Orthoplex Solutions Inc. React Development Cha
 
 - **Username:** `mor_2314`
 - **Password:** `83r5^_`
+
+---
+
+## Features & Implementation
+
+- **Login Page**: Validates input, uses fake API for authentication, redirects to dashboard on success.
+- **Dashboard Page**: Fetches and displays product/user data from [Fake Store API](https://fakestoreapi.com/).
+- **Navbar**: Responsive, allows navigation, and shows/hides based on authentication and screen size.
+- **Protected Routes**: Only authenticated users can access the dashboard.
+- **Loader**: Consistent loading spinner shown during API requests and auth checks.
+- **Responsive Design**: Uses CSS Grid and Flexbox for layout; mobile-friendly navbar.
+- **Centralized Types**: All TypeScript interfaces/types are in `src/types`.
+- **State Management**: Uses React Context for authentication state.
+- **Logout**: Clears session and redirects to login (bonus).
+
+---
+
+## Screenshots
+
+### Login Page
+
+![Login Page](./screenshots/login.png)
+
+### Register Page
+
+![Register Page](./screenshots/register.png)
+
+### Dashboard
+
+![Dashboard](./screenshots/dashboard.png)
 
 ---
 
@@ -50,20 +84,6 @@ npm run preview
 
 ---
 
-## Features & Implementation
-
-- **Login Page**: Validates input, uses fake API for authentication, redirects to dashboard on success.
-- **Dashboard Page**: Fetches and displays product/user data from [Fake Store API](https://fakestoreapi.com/).
-- **Navbar**: Responsive, allows navigation, and shows/hides based on authentication and screen size.
-- **Protected Routes**: Only authenticated users can access the dashboard.
-- **Loader**: Consistent loading spinner shown during API requests and auth checks.
-- **Responsive Design**: Uses CSS Grid and Flexbox for layout; mobile-friendly navbar.
-- **Centralized Types**: All TypeScript interfaces/types are in `src/types`.
-- **State Management**: Uses React Context for authentication state.
-- **Logout**: Clears session and redirects to login (bonus).
-
----
-
 ## Project Structure
 
 ```
@@ -78,6 +98,7 @@ src/
   services/           # API service logic
   styles/             # Global and module CSS
   types/              # All TypeScript types and interfaces
+  utils/              # Utility functions
 ```
 
 ---
@@ -86,3 +107,9 @@ src/
 
 - **Fake API**: This app uses [Fake Store API](https://fakestoreapi.com/) for demonstration. No real registration or data persistence occurs.
 - **Registration**: The registration page is present for UI demonstration only; it does not create real users.
+
+---
+
+## License
+
+MIT
