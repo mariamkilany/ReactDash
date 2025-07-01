@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #4F7BFF;
+    --primary-dark: #1E293B;
+    --background: #0F172A;
+    --card-background: #1E293B;
+    --text-light: #F8FAFC;
+    --text-muted: #94A3B8;
+    --accent: #38BDF8;
+    --border: #334155;
+    --border-light: #475569;
+    --link: #60A5FA;
+    --error: #EF4444;
+    --success: #22C55E;
+    --warning: #FACC15;
+}
+
+html,
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: var(--background);
+    color: #fff;
+    line-height: 1.5;
+    min-height: 100vh;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+
+input,
+button {
+    font-family: inherit;
+}
+
+/* Custom Scrollbar Styles */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--card-background);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-light);
+    border-radius: 4px;
+    transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--border);
+}
+
+::-webkit-scrollbar-corner {
+    background: var(--card-background);
+}
+
+/* Firefox Scrollbar */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-light) var(--card-background);
+}
+
+/* Smooth scrolling for the entire page */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom scrollbar for specific containers */
+.scrollable-container::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+.scrollable-container::-webkit-scrollbar-track {
+    background: rgba(30, 41, 59, 0.5);
+    border-radius: 3px;
+}
+
+.scrollable-container::-webkit-scrollbar-thumb {
+    background: var(--border-light);
+    border-radius: 3px;
+}
+
+.scrollable-container::-webkit-scrollbar-thumb:hover {
+    background: var(--border);
+}
