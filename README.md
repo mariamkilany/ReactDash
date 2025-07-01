@@ -1,8 +1,8 @@
 # React Development Challenge | Orthoplex Solutions Inc.
 
-[![Live Demo](https://img.shields.io/badge/Live%20Site-react--dash--psi.vercel.app-blue?style=flat-square)](https://react-dash-psi.vercel.app/login)
+[![Live Demo](https://img.shields.io/badge/Live%20Site-react--dash--psi.vercel.app-blue?style=flat-square)](https://react-dash-psi.vercel.app/)
 
-**Live Site:** [https://react-dash-psi.vercel.app/login](https://react-dash-psi.vercel.app/login)
+**Live Site:** [https://react-dash-psi.vercel.app/login](https://react-dash-psi.vercel.app/)
 
 This project is a solution to the Orthoplex Solutions Inc. React Development Challenge. It demonstrates a modern, responsive dashboard application built with **React**, **TypeScript**, and **Vite**.
 
