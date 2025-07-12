@@ -35,7 +35,9 @@ export function Login() {
 
   const onSubmit = async (data: LoginFormData) => {
     setLoginError("");
-    const success = await login(data.username, data.password);
+    const success = await login(data.email, data.password);
+
+    console.log("success", success);
 
     if (success) {
       navigate("/dashboard");
@@ -55,12 +57,8 @@ export function Login() {
           <form onSubmit={handleSubmit(onSubmit)}>
             <CardContent>
               <InputGroup>
-                <Input
-                  placeholder="User name"
-                  type="text"
-                  {...register("username")}
-                />
-                <ErrorMessage>{errors.username?.message || ""}</ErrorMessage>
+                <Input placeholder="Email" type="text" {...register("email")} />
+                <ErrorMessage>{errors.email?.message || ""}</ErrorMessage>
               </InputGroup>
               <InputGroup>
                 <Input

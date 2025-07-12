@@ -3,6 +3,7 @@ import { productApi, userApi } from "../../services/api";
 import { StatsCard } from "./StatsCard";
 import { FaShoppingCart, FaUsers, FaDollarSign, FaStar } from "react-icons/fa";
 import styled from "styled-components";
+import { useMemo } from "react";
 
 const StatsGrid = styled.div`
   display: grid;
@@ -32,13 +33,17 @@ export function DashboardStats() {
     queryFn: userApi.getAll,
   });
 
-  const totalProducts = products?.length || 0;
-  const totalUsers = users?.length || 0;
-  const totalRevenue =
-    products?.reduce((sum, product) => sum + product.price, 0) || 0;
-  const avgRating =
-    (products?.reduce((sum, product) => sum + product.rating.rate, 0) || 0) /
-    (products?.length || 1);
+  const totalProducts = useMemo(() => products?.length || 0, [products]);
+  const totalUsers = useMemo(() => users?.length || 0, [users]);
+  const safeTotalRevenue = useMemo(() => {
+    const totalRevenue = Number(
+      products?.reduce((sum, product) => sum + Number(product.price || 0), 0)
+    );
+    return isNaN(totalRevenue) ? 0 : totalRevenue;
+  }, [products]);
+  const safeAvgPrice = useMemo(() => {
+    return totalProducts > 0 ? safeTotalRevenue / totalProducts : 0;
+  }, [safeTotalRevenue, totalProducts]);
 
   return (
     <StatsGrid>
@@ -56,13 +61,13 @@ export function DashboardStats() {
       />
       <StatsCard
         title="Total Revenue"
-        value={`$${totalRevenue.toFixed(2)}`}
+        value={`$${safeTotalRevenue.toFixed(2)}`}
         icon={<FaDollarSign />}
         trend={{ value: 15, isPositive: true }}
       />
       <StatsCard
-        title="Average Rating"
-        value={avgRating.toFixed(1)}
+        title="Average Price"
+        value={`$${safeAvgPrice.toFixed(2)}`}
         icon={<FaStar />}
         trend={{ value: 5, isPositive: true }}
       />

@@ -59,7 +59,17 @@ export interface LinkProps extends ReactRouterLinkProps {
 }
 
 // Input
-export type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
+export type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
+  label?: string;
+  error?: string;
+};
+
+// Textarea
+export type TextareaProps =
+  React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
+    label?: string;
+    error?: string;
+  };
 
 // Card
 export type CardTitlePosition = "left" | "center" | "right";
@@ -67,4 +77,5 @@ export type CardTitlePosition = "left" | "center" | "right";
 // Button
 export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   children: ReactNode;
+  variant?: "primary" | "outline";
 };

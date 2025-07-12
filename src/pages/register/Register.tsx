@@ -38,23 +38,8 @@ export function Register() {
 
     const userData = {
       email: data.email,
-      username: data.username,
+      name: data.username,
       password: data.password,
-      name: {
-        firstname: data.username,
-        lastname: "",
-      },
-      address: {
-        city: "",
-        street: "",
-        number: 0,
-        zipcode: "",
-        geolocation: {
-          lat: "0",
-          long: "0",
-        },
-      },
-      phone: "",
     };
 
     const success = await registerUser(userData);

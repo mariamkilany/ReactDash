@@ -6,6 +6,8 @@ const TableContainer = styled.div`
   overflow-x: auto;
   max-width: 100%;
   width: 100%;
+  max-height: 400px;
+  overflow-y: auto;
 
   @media (max-width: 768px) {
     font-size: 0.875rem;

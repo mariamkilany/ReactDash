@@ -4,7 +4,7 @@ import { userApi } from "../../services/api";
 import { Card, CardContent, CardTitle, Table } from "../ui";
 import type { TableColumn, User } from "../../types";
 
-const NameCell = styled.div`
+const IDCell = styled.div`
   font-weight: 500;
   font-size: 0.875rem;
 `;
@@ -16,11 +16,6 @@ const EmailCell = styled.div`
 
 const UsernameCell = styled.div`
   font-size: 0.875rem;
-`;
-
-const CityCell = styled.div`
-  font-size: 0.875rem;
-  color: var(--text-muted);
 `;
 
 export function UsersTable() {
@@ -35,13 +30,9 @@ export function UsersTable() {
 
   const columns: TableColumn<User>[] = [
     {
-      key: "name",
-      header: "Name",
-      render: (user) => (
-        <NameCell>
-          {user.name.firstname} {user.name.lastname}
-        </NameCell>
-      ),
+      key: "id",
+      header: "ID",
+      render: (user) => <IDCell>{user.id}</IDCell>,
     },
     {
       key: "email",
@@ -51,21 +42,16 @@ export function UsersTable() {
     {
       key: "username",
       header: "Username",
-      render: (user) => <UsernameCell>{user.username}</UsernameCell>,
-    },
-    {
-      key: "city",
-      header: "City",
-      render: (user) => <CityCell>{user.address.city}</CityCell>,
+      render: (user) => <UsernameCell>{user.name}</UsernameCell>,
     },
   ];
 
   return (
     <Card>
       <CardContent>
-        <CardTitle style={{ marginBottom: "1rem" }}>Recent Users</CardTitle>
+        <CardTitle style={{ marginBottom: "1rem" }}> Users</CardTitle>
         <Table
-          data={users?.slice(0, 10) || []}
+          data={users || []}
           columns={columns}
           isLoading={isLoading}
           error={error}

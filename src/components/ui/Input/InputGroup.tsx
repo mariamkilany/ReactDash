@@ -3,7 +3,7 @@ import styled from "styled-components";
 const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height: 65px;
+  min-height: 65px;
   gap: 0.5rem;
 `;
 

@@ -3,6 +3,11 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { appName } from "../../constants";
 import { MdDashboard, MdLogout, MdClose, MdMenu } from "react-icons/md";
 import { useAuth } from "../../hooks/useAuth";
+import { useState, useEffect } from "react";
+import { userApi } from "../../services/api";
+import { ProfileForm } from "./ProfileForm";
+import type { User } from "../../types";
+import { Modal } from "../ui";
 
 const SiteNav = styled.nav<{ collapsed: boolean; isMobile?: boolean }>`
   background: var(--primary-dark);
@@ -129,6 +134,10 @@ const ProfileRow = styled.div`
   align-items: center;
   gap: 20px;
   padding: 1rem;
+  cursor: pointer;
+  &:hover {
+    background: rgba(0, 0, 0, 0.03);
+  }
 `;
 
 const ProfileImage = styled.img`
@@ -166,6 +175,15 @@ export function Navbar({
   const { pathname: activePath } = useLocation();
   const navigate = useNavigate();
   const { logout } = useAuth();
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    const userId = localStorage.getItem("user_id");
+    if (userId) {
+      userApi.getById(Number(userId)).then(setUser);
+    }
+  }, []);
 
   const handleToggle = () => setCollapsed(!collapsed);
   const handleLogout = () => {
@@ -178,6 +196,31 @@ export function Navbar({
       setCollapsed(true);
     }
   };
+
+  // const handleUpdate = async (name: string, email: string) => {
+  //   if (!user) return;
+  //   await userApi.update(user.id, { name, email });
+  //   const updated = await userApi.getById(user.id);
+  //   setUser(updated);
+  // };
+
+  // const handleDelete = async () => {
+  //   if (!user) return;
+  //   if (
+  //     !window.confirm(
+  //       "Are you sure you want to delete your account? This action cannot be undone."
+  //     )
+  //   )
+  //     return;
+  //   setIsDeleting(true);
+  //   try {
+  //     await userApi.delete(user.id);
+  //     logout();
+  //     window.location.href = "/register";
+  //   } finally {
+  //     setIsDeleting(false);
+  //   }
+  // };
 
   return (
     <>
@@ -204,10 +247,21 @@ export function Navbar({
             </>
           )}
         </AppNameRow>
-        <ProfileRow>
-          <ProfileImage src="https://i.pravatar.cc/150?img=3" alt="Profile" />
-          <ProfileName collapsed={collapsed}>Jane Doe</ProfileName>
+        <ProfileRow onClick={() => setShowUpdateModal(true)}>
+          <ProfileImage
+            src={`https://i.pravatar.cc/150?u=${user?.email || "default"}`}
+            alt="Profile"
+          />
+          <ProfileName collapsed={collapsed}>{user?.name}</ProfileName>
         </ProfileRow>
+        <Modal
+          open={showUpdateModal}
+          onClose={() => setShowUpdateModal(false)}
+          title="Update Profile"
+          width="500px"
+        >
+          <ProfileForm onCancel={() => setShowUpdateModal(false)} />
+        </Modal>
         <NavList>
           {navItems.map((item) => (
             <NavItem

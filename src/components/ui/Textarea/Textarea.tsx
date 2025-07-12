@@ -1,9 +1,10 @@
 import styled from "styled-components";
-import type { InputProps } from "../../../types";
+import type { TextareaProps } from "../../../types";
 
-const InputContainer = styled.div`
+const TextareaContainer = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 0.5rem;
 `;
 
 const Label = styled.label`
@@ -18,21 +19,23 @@ const ErrorMessage = styled.span`
   margin-top: 0.25rem;
 `;
 
-const StyledInput = styled.input<{ $hasError?: boolean }>`
-  font-size: 16px;
-  padding: 10px 0;
-  display: block;
+const StyledTextarea = styled.textarea<{ $hasError?: boolean }>`
   width: 100%;
-  border: none;
-  border-bottom: 1px solid
+  padding: 0.5rem;
+  border: 1px solid
     ${({ $hasError }) => ($hasError ? "var(--error)" : "var(--border)")};
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-family: inherit;
+  resize: vertical;
   background-color: transparent;
   color: var(--text-light);
   outline: none;
   transition: border-color 0.2s ease-in-out;
+
   &:focus {
-    border-bottom-color: ${({ $hasError }) =>
-      $hasError ? "var(--error)" : "var(--primary)"};
+    border-color: ${({ $hasError }) =>
+      $hasError ? "var(--error" : "var(--primary)"};
   }
 
   &::placeholder {
@@ -40,18 +43,17 @@ const StyledInput = styled.input<{ $hasError?: boolean }>`
   }
 `;
 
-export const Input = ({ label, error, ...props }: InputProps) => {
-  console.log("props", props);
+export const Textarea = ({ label, error, ...props }: TextareaProps) => {
   return label?.trim() ? (
-    <InputContainer>
+    <TextareaContainer>
       <Label>{label}</Label>
-      <StyledInput $hasError={!!error} {...props} />
+      <StyledTextarea $hasError={!!error} {...props} />
       {error && <ErrorMessage>{error}</ErrorMessage>}
-    </InputContainer>
+    </TextareaContainer>
   ) : (
     <>
-      <StyledInput $hasError={!!error} {...props} />
-      {error && <ErrorMessage>{error}</ErrorMessage>}
+      <StyledTextarea $hasError={!!error} {...props} />
+      {/* {error && <ErrorMessage>{error}</ErrorMessage>} */}
     </>
   );
 };
