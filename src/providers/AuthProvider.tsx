@@ -35,16 +35,27 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (savedToken) {
       setToken(savedToken);
       if (savedUserId) {
-        userApi.getById(Number(savedUserId)).then((user) => {
-          setUser({
-            id: user.id,
-            email: user.email,
-            username: user.name, // or user.email if you don't have a username
+        userApi
+          .getById(Number(savedUserId))
+          .then((user) => {
+            setUser({
+              id: user.id,
+              email: user.email,
+              username: user.name,
+            });
+          })
+          .catch((error) => {
+            console.error("Failed to load user data:", error);
+          })
+          .finally(() => {
+            setIsLoading(false);
           });
-        });
+      } else {
+        setIsLoading(false);
       }
+    } else {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   }, []);
 
   const refreshAccessToken = async (): Promise<boolean> => {

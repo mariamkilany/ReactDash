@@ -3,10 +3,9 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { appName } from "../../constants";
 import { MdDashboard, MdLogout, MdClose, MdMenu } from "react-icons/md";
 import { useAuth } from "../../hooks/useAuth";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { userApi } from "../../services/api";
 import { ProfileForm } from "./ProfileForm";
-import type { User } from "../../types";
 import { Modal } from "../ui";
 
 const SiteNav = styled.nav<{ collapsed: boolean; isMobile?: boolean }>`
@@ -161,6 +160,7 @@ const ProfileName = styled.div<{ collapsed: boolean }>`
 `;
 
 import type { NavbarProps } from "../../types";
+import { useQuery } from "@tanstack/react-query";
 
 const navItems = [
   { to: "/dashboard", label: "Dashboard", icon: <MdDashboard /> },
@@ -176,14 +176,12 @@ export function Navbar({
   const navigate = useNavigate();
   const { logout } = useAuth();
   const [showUpdateModal, setShowUpdateModal] = useState(false);
-  const [user, setUser] = useState<User | null>(null);
-
-  useEffect(() => {
-    const userId = localStorage.getItem("user_id");
-    if (userId) {
-      userApi.getById(Number(userId)).then(setUser);
-    }
-  }, []);
+  const userId = localStorage.getItem("user_id");
+  const { data: user } = useQuery({
+    queryKey: ["user", userId],
+    queryFn: () => userApi.getById(Number(userId)),
+    enabled: !!userId,
+  });
 
   const handleToggle = () => setCollapsed(!collapsed);
   const handleLogout = () => {
@@ -196,31 +194,6 @@ export function Navbar({
       setCollapsed(true);
     }
   };
-
-  // const handleUpdate = async (name: string, email: string) => {
-  //   if (!user) return;
-  //   await userApi.update(user.id, { name, email });
-  //   const updated = await userApi.getById(user.id);
-  //   setUser(updated);
-  // };
-
-  // const handleDelete = async () => {
-  //   if (!user) return;
-  //   if (
-  //     !window.confirm(
-  //       "Are you sure you want to delete your account? This action cannot be undone."
-  //     )
-  //   )
-  //     return;
-  //   setIsDeleting(true);
-  //   try {
-  //     await userApi.delete(user.id);
-  //     logout();
-  //     window.location.href = "/register";
-  //   } finally {
-  //     setIsDeleting(false);
-  //   }
-  // };
 
   return (
     <>
